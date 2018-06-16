@@ -19,4 +19,9 @@ Extra command line params for Parity: --pruning=archive --no-warp
     - BallotKey: The affected key to look for in https://voting.poa.network
 
 2. Start your local parity instance and let it fully sync
-3. Build the program either in Visual Studio or run the provided release executable.
+3. Build the program either in Visual Studio or run the provided release binaries.
+
+To Run the binaries in Windows. Download the binaries from the Release
+1. Open up a command prompt
+2. Navigate to the folder where you download the binaries.
+3. Run "dotnet POATools.dll" without the quotes
