@@ -4,11 +4,12 @@ POA-Tools is a .NET CORE application that is built for POA Network based blockch
 
 # Prerequisites
 
-1. Fully Archived Parity instance pointed at either Core or Sokol POA Network chains
+1. Windows/Mac/Linux OS
+2. Install the .NET CORE runtime libaries (See [Microsoft .NET Core Downloads](https://www.microsoft.com/net/download))
+
+3. Fully Archived Parity instance pointed at either Core or Sokol POA Network chains
 (See [POA Installation](https://github.com/poanetwork/wiki/wiki/POA-Installation))
 Extra command line params for Parity: --pruning=archive --no-warp
-
-2. Windows/Mac/Linux OS
 
 #Instructions
 1. Open settings.json file and fill in the following infomation
@@ -21,7 +22,8 @@ Extra command line params for Parity: --pruning=archive --no-warp
 2. Start your local parity instance and let it fully sync
 3. Build the program either in Visual Studio or run the provided release binaries.
 
-To Run the binaries in Windows. Download the binaries from the Release
-1. Open up a command prompt
+#Run binaries from the Release
+1. Download Binaries from Release (See [POA-Tools v1.0](https://github.com/ajkagy/POA-Tools/releases/tag/1.0))
+1. Open up a command prompt or bash prompt
 2. Navigate to the folder where you download the binaries.
 3. Run "dotnet POATools.dll" without the quotes
