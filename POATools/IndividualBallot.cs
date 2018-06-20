@@ -112,7 +112,7 @@ namespace POATools
                                     if (!_ballotInfoSet)
                                     {
                                         List<ParameterOutput> outputBallotCreate = votingToChangeKeysContract.GetFunction("createVotingForKeys").DecodeInput(block.Transactions[y].Input);
-                                        if (outputBallotCreate[2].Result.ToString() == _ballotKey)
+                                        if (outputBallotCreate[2].Result.ToString().ToLower() == _ballotKey.ToLower())
                                         {
                                             _ballotInfo = outputBallotCreate[6].Result.ToString();
                                             _ballotInfoSet = true;
