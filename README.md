@@ -27,3 +27,7 @@ Extra command line params for Parity: --pruning=archive --no-warp
 2. Open up a command prompt or bash prompt
 3. Navigate to the folder where you download the binaries.
 4. Run "dotnet POATools.dll" without the quotes
+
+# Example output
+
+![Example Output](https://raw.githubusercontent.com/ajkagy/POA-Tools/master/results_James_core.png)
