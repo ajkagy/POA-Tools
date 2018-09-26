@@ -78,49 +78,54 @@ namespace POATools
 
                     for (int y = 0; y < block.Transactions.Length; y++)
                     {
-
-                        if (block.Transactions[y].To == _specData.VOTING_TO_CHANGE_KEYS_ADDRESS && validators.Find(x => x.voting.Contains(block.Transactions[y].From)) != null)
+                        if (block.Transactions[y].To != null)
                         {
-                            Validator v = validators.Find(x => x.voting.Contains(block.Transactions[y].From));
-                            DateTime dt = Helpers.UnixTimeStampToDateTime((int)block.Timestamp.Value);
-                            if (block.Transactions[y].Input.Substring(block.Transactions[y].Input.Length - 1) == "1")
+                            if (block.Transactions[y].To.ToLower() == _specData.VOTING_TO_CHANGE_KEYS_ADDRESS.ToLower() && validators.Find(x => x.voting.Contains(block.Transactions[y].From)) != null)
                             {
-                                List<ParameterOutput> output = votingToChangeKeysContract.GetFunction("vote").DecodeInput(block.Transactions[y].Input);
-                                //Yes Vote
-                                if ((BigInteger)output[0].Result == _ballot)
+                                Console.WriteLine("Transaction Found, block: " + block.Number.Value.ToString());
+                                Validator v = validators.Find(x => x.voting.Contains(block.Transactions[y].From));
+                                DateTime dt = Helpers.UnixTimeStampToDateTime((int)block.Timestamp.Value);
+                                if (block.Transactions[y].Input.Substring(block.Transactions[y].Input.Length - 1) == "1")
                                 {
-                                    v.voted = true;
-                                    v.voteRecord = "Yes";
-                                    v.timeVoted = dt.ToString("MM/dd/yyyy hh:mm tt");
-                                }
-                            }
-                            else if (block.Transactions[y].Input.Substring(block.Transactions[y].Input.Length - 1) == "2")
-                            {
-                                List<ParameterOutput> output = votingToChangeKeysContract.GetFunction("vote").DecodeInput(block.Transactions[y].Input);
-                                //No Vote
-                                if ((BigInteger)output[0].Result == _ballot)
-                                {
-                                    v.voted = true;
-                                    v.timeVoted = dt.ToString("MM/dd/yyyy hh:mm tt");
-                                    v.voteRecord = "No";
-                                }
-                            } else
-                            {
-                                //Ballot Info
-                                try
-                                {
-                                    if (!_ballotInfoSet)
+                                    List<ParameterOutput> output = votingToChangeKeysContract.GetFunction("vote").DecodeInput(block.Transactions[y].Input);
+                                    //Yes Vote
+                                    if ((BigInteger)output[0].Result == _ballot)
                                     {
-                                        List<ParameterOutput> outputBallotCreate = votingToChangeKeysContract.GetFunction("createVotingForKeys").DecodeInput(block.Transactions[y].Input);
-                                        if (outputBallotCreate[2].Result.ToString().ToLower() == _ballotKey.ToLower())
+                                        v.voted = true;
+                                        v.voteRecord = "Yes";
+                                        v.timeVoted = dt.ToString("MM/dd/yyyy hh:mm tt");
+                                    }
+                                }
+                                else if (block.Transactions[y].Input.Substring(block.Transactions[y].Input.Length - 1) == "2")
+                                {
+                                    List<ParameterOutput> output = votingToChangeKeysContract.GetFunction("vote").DecodeInput(block.Transactions[y].Input);
+                                    //No Vote
+                                    if ((BigInteger)output[0].Result == _ballot)
+                                    {
+                                        v.voted = true;
+                                        v.timeVoted = dt.ToString("MM/dd/yyyy hh:mm tt");
+                                        v.voteRecord = "No";
+                                    }
+                                }
+                                else
+                                {
+                                    //Ballot Info
+                                    try
+                                    {
+                                        if (!_ballotInfoSet)
                                         {
-                                            _ballotInfo = outputBallotCreate[6].Result.ToString();
-                                            _ballotInfoSet = true;
+                                            List<ParameterOutput> outputBallotCreate = votingToChangeKeysContract.GetFunction("createVotingForKeys").DecodeInput(block.Transactions[y].Input);
+                                            if (outputBallotCreate[2].Result.ToString().ToLower() == _ballotKey.ToLower())
+                                            {
+                                                _ballotInfo = outputBallotCreate[6].Result.ToString();
+                                                _ballotInfoSet = true;
+                                            }
                                         }
                                     }
-                                } catch (Exception ex)
-                                {
+                                    catch (Exception ex)
+                                    {
 
+                                    }
                                 }
                             }
                         }
