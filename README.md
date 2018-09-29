@@ -15,6 +15,7 @@ Extra command line params for Parity: --pruning=archive --no-warp
 1. Open settings.json file and fill in the following infomation
     - RPC is defaulted to localhost. Leave this alone unless your rpc port is different for your local parity instance
     - Network: Use either "Sokol" or "Core"
+    - Mode: use either "Emission" or "Validator"
     - Starting Block: The approximate starting block of where the ballot was created. !!This is important. If this is off then the program will not correctly read all of the votes recorded.!!
     - Ballot: The ballot number to search for in https://voting.poa.network
     - BallotKey: The affected key to look for in https://voting.poa.network
