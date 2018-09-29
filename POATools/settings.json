@@ -1,7 +1,8 @@
 ﻿{
   "RPC": "http://localhost:8545",
   "Network": "Sokol",
-  "Starting Block": 4715000,
-  "Ballot": 69,
-  "BallotKey": "0x74113B035DdEF3b7E3049E1A731bDf95e54B337F"
+  "Mode": "Emission",
+  "Starting Block": 4763000,
+  "Ballot": 1,
+  "BallotKey": "0x2Ae254A7f1b3cC40fFFB8b23756288a67015a1FB"
 }

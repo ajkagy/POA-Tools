@@ -18,11 +18,18 @@ namespace POATools
 
         public static string GetAbi(string network, string abi)
         {
-            WebClient client = new WebClient();
-            Stream stream = client.OpenRead("https://raw.githubusercontent.com/poanetwork/poa-chain-spec/" + network.ToLower() + "/abis/" + abi + ".abi.json");
-            StreamReader reader = new StreamReader(stream);
-            String content = reader.ReadToEnd();
-            return content;
+            try
+            {
+                WebClient client = new WebClient();
+                Stream stream = client.OpenRead("https://raw.githubusercontent.com/poanetwork/poa-chain-spec/" + network.ToLower() + "/abis/" + abi + ".abi.json");
+                StreamReader reader = new StreamReader(stream);
+                String content = reader.ReadToEnd();
+                return content;
+            }
+            catch (Exception ex)
+            {
+                return "";
+            }
         }
 
         public static string GetSpec(string network)

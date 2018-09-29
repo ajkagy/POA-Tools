@@ -41,8 +41,20 @@ namespace POATools
 
                 ChainSpec spec = new ChainSpec(Configuration["Network"]);
 
-                IndividualBallot ballot = new IndividualBallot(Configuration["RPC"], Configuration["Network"], Int32.Parse(Configuration["Starting Block"]), Int32.Parse(Configuration["Ballot"]), Configuration["BallotKey"], spec);
-                ballot.getValdatorVotingKeys().Wait();
+                IndividualBallot ballot = new IndividualBallot(Configuration["RPC"], Configuration["Network"], Configuration["Mode"], Int32.Parse(Configuration["Starting Block"]), Int32.Parse(Configuration["Ballot"]), Configuration["BallotKey"], spec);
+                if (Configuration["Mode"] == "Emission")
+                {
+                    Console.WriteLine(Environment.NewLine);
+                    Console.WriteLine("POA-Tools - Searching for Emission ballots...");
+                    Console.WriteLine(Environment.NewLine);
+                    ballot.findEmissionBallotStats().Wait();
+                } else
+                {
+                    Console.WriteLine(Environment.NewLine);
+                    Console.WriteLine("POA-Tools - Searching for Validator ballots...");
+                    Console.WriteLine(Environment.NewLine);
+                    ballot.getValdatorVotingKeys().Wait();
+                }
                 Console.ReadLine();
 
             }
